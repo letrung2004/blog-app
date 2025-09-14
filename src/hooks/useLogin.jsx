@@ -27,13 +27,29 @@ const useLogin = () => {
             console.log("in useLogin:", loginResponse);
             login(loginResponse);
 
-            showToast("Đăng nhập thành công!", "success");
-
             const from = location.state?.from?.pathname || "/";
             navigate(from, { replace: true });
 
         } catch (error) {
             console.error("Login error:", error);
+
+            if (error.response?.data) {
+                const errorData = error.response.data;
+
+                if (errorData.code === 1004) {
+                    setErrors({
+                        general: "Tên đăng nhập hoặc mật khẩu không đúng"
+                    });
+                } else {
+                    const errorMessage = errorData.message || "Đăng nhập thất bại";
+                    setErrors({ general: errorMessage });
+                    showToast(errorMessage, "error");
+                }
+            } else {
+                setErrors({
+                    general: "Không thể kết nối đến server"
+                });
+            }
 
         } finally {
             setLoading(false);

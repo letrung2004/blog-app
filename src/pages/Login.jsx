@@ -1,4 +1,3 @@
-// Login.jsx - Phiên bản sử dụng useLogin hook
 import { useState } from "react"
 import { Link } from "react-router-dom"
 import useLogin from "../hooks/useLogin"
@@ -24,6 +23,13 @@ export default function Login() {
                 <h2 className="text-2xl font-bold mb-6 text-center text-gray-800">
                     Đăng nhập
                 </h2>
+
+                {errors.general && (
+                    <div className="bg-red-50 border border-red-300 text-red-700 px-4 py-3 rounded-lg mb-4">
+                        {errors.general}
+                    </div>
+                )}
+
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
                         <input

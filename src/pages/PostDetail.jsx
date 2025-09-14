@@ -55,7 +55,7 @@ export default function PostDetail() {
                             {post.title}
                         </h1>
 
-                        {auth && (auth.username === post.username || auth.id === post.userId) && (
+                        {auth && (auth.username === post.username) && (
                             <div className="flex gap-2">
                                 <Link
                                     to={`/posts/${post.id}/edit`}
@@ -113,7 +113,7 @@ export default function PostDetail() {
                     Về danh sách
                 </Link>
 
-                {auth && (auth.username === post.username || auth.id === post.userId) && (
+                {auth && (auth.username === post.username) && (
                     <Link
                         to={`/posts/${post.id}/edit`}
                         className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors"

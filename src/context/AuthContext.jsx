@@ -9,7 +9,6 @@ export const AuthProvider = ({ children }) => {
     const [isAuthenticated, setIsAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
 
-    // Hàm decode JWT để lấy thông tin user
     const decodeToken = (token) => {
         try {
             const payload = JSON.parse(atob(token.split('.')[1]));
@@ -26,14 +25,12 @@ export const AuthProvider = ({ children }) => {
             if (token) {
                 const decodedToken = decodeToken(token);
                 if (decodedToken && decodedToken.exp * 1000 > Date.now()) {
-                    // Token còn hạn, restore user info
                     setAuth({
                         username: decodedToken.username,
-                        id: decodedToken.sub // subject trong JWT thường là user ID
+                        id: decodedToken.sub
                     });
                     setIsAuthenticated(true);
                 } else {
-                    // Token hết hạn
                     tokenStorage.removeToken();
                 }
             }

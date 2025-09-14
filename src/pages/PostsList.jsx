@@ -10,13 +10,17 @@ export default function PostsList() {
     const [filter, setFilter] = useState("all");
 
     useEffect(() => {
+        console.log("user dang dang nhap:", auth);
         if (filter === "my" && auth?.id) {
             fetchPosts(auth.id);
         } else {
             fetchPosts();
         }
+        console.log("danh sach post:", posts);
     }, [filter, auth, fetchPosts]);
-    if (loading) {
+
+
+    if (loading && auth) {
         return (
             <div className="flex justify-center items-center min-h-64">
                 <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-500"></div>
@@ -80,7 +84,7 @@ export default function PostsList() {
                                     </p>
                                 </div>
 
-                                {auth && (auth.username === post.username || auth.id === post.userId) && (
+                                {auth && (auth?.username === post.username) && (
                                     <div className="flex gap-2 ml-4">
                                         <Link
                                             to={`/posts/${post.id}/edit`}
