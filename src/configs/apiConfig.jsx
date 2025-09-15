@@ -1,7 +1,7 @@
 import axios from "axios";
 import { tokenStorage } from "../utils/storage";
 
-const URL = "http://localhost:8080/api";
+const URL = "https://aucontech-intern-test-blog-management-system-production.up.railway.app/api";
 
 export const API = axios.create({
     baseURL: URL,
